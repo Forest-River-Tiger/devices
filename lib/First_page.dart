@@ -1,51 +1,42 @@
-
-
 import 'package:devices/Second_page.dart';
 import 'package:flutter/material.dart';
 
 class FirstPage extends StatelessWidget {
-  String nameText = '';
-
   @override
   Widget build(BuildContext context) {
-    // Scaffoldは大元の画面
     return Scaffold(
-      // AppBarはnavigationbar
-      appBar: AppBar(
-        title: const Text('ファースト'),
-      ),
-      // Containerは箱(指定しなければ何もなし)
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.network(
-                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-                ),
-              TextField(
-                onChanged: (text) {
-                  nameText = text;
-                },
+        child: Column(
+          // 「start」は上寄せ
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 150),
+              child: const Text('device board',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold
               ),
-              ElevatedButton(
-                onPressed: (){
-                  //ボタン押した時のコード
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SecondPage(nameText),
-                      // 下から上に画面が出てくる
-                      fullscreenDialog: true,
-                      ),
-                  );
-                },
-                child: const Text('セカンドへ'),
-                ),
-            ],
-          ),
-        )
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, bottom: 100),
+              child: const Text('端末管理アプリ',
+              style: TextStyle(
+                fontSize: 15,
+              ),),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // ボタンを押した時の処理
+              },
+              child: const Text('始める'),
+              style: ButtonStyle(
+                  // ボタンカラー変更(色:grey)
+                  backgroundColor: MaterialStateProperty.all(Colors.grey)),
+            ),
+          ],
+        ),
       ),
     );
   }
