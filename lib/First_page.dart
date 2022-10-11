@@ -1,4 +1,5 @@
 import 'package:devices/Second_page.dart';
+import 'package:devices/Third_page.dart';
 import 'package:flutter/material.dart';
 
 class FirstPage extends StatelessWidget {
@@ -27,8 +28,14 @@ class FirstPage extends StatelessWidget {
               ),),
             ),
             ElevatedButton(
+              // ボタンを押した時の処理
               onPressed: () {
-                // ボタンを押した時の処理
+                Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SecondPage(),
+                ),
+              );
               },
               child: const Text('始める'),
               style: ButtonStyle(
