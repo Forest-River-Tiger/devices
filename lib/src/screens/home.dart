@@ -1,8 +1,8 @@
-import 'package:devices/Second_page.dart';
-import 'package:devices/Third_page.dart';
+import 'package:devices/src/screens/my_devices.dart';
+import 'package:devices/src/screens/all_devices.dart';
 import 'package:flutter/material.dart';
 
-class FirstPage extends StatelessWidget {
+class home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

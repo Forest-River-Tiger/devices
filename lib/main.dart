@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'First_page.dart';
+import 'src/screens/home.dart';
 
 // アプリを開いた時に最初に呼ばれる箇所
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: FirstPage(),
+      home: home(),
     );
   }
 }
