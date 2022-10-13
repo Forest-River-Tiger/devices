@@ -9,49 +9,50 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: const MyStatefulWidget(),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+// class MyStatefulWidget extends StatefulWidget {
+//   const MyStatefulWidget({Key? key}) : super(key: key);
 
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
+//   @override
+//   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+// }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  static const _screens = [
-    MyDevicePage(),
-    AllDevicePage(),
-  ];
+// class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+//   static const _screens = [
+//     MyDevicePage(),
+//     AllDevicePage(),
+//   ];
 
-  int _selectedIndex = 0;
+//   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+//   void _onItemTapped(int index) {
+//     setState(() {
+//       _selectedIndex = index;
+//     });
+//   }
 
-    @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: _screens[_selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'my device'),
-            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'all device'),
-          ],
-          type: BottomNavigationBarType.fixed,
-        ));
-  }
-}
+//     @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         body: _screens[_selectedIndex],
+//         bottomNavigationBar: BottomNavigationBar(
+//           currentIndex: _selectedIndex,
+//           onTap: _onItemTapped,
+//           items: const <BottomNavigationBarItem>[
+//             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'my device'),
+//             BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'all device'),
+//           ],
+//           type: BottomNavigationBarType.fixed,
+//         ));
+//   }
+// }

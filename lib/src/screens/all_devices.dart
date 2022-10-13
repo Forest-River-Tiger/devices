@@ -11,10 +11,11 @@ class AllDevicePage extends StatelessWidget {
     // Scaffoldは大元の画面
     return Scaffold(
         // AppBarはnavigationbar
-        appBar: AppBar(
-          backgroundColor: Colors.blueGrey,
-          title: const Text('リスト'),
-        ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.red.withOpacity(0.5),
+        title: const Text('デバイス一覧', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+      ),
         // Containerは箱(指定しなければ何もなし)
         // ListViewの場合、スクロールすることも可能
         body: ListView(
