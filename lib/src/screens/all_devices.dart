@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ThirdPage extends StatelessWidget {
-  final List<String> entries = <String>['A', 'B', 'C', 'Taiga'];
-  final List<int> colorCodes = <int>[600, 500, 100];
+class AllDevicePage extends StatelessWidget {
+  const AllDevicePage({Key? key}) : super(key: key);
+
+  // final List<String> entries = <String>['A', 'B', 'C', 'Taiga'];
+  // final List<int> colorCodes = <int>[600, 500, 100];
 
   @override
   Widget build(BuildContext context) {
