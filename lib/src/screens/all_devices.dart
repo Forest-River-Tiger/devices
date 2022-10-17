@@ -1,3 +1,4 @@
+import 'package:devices/src/screens/add_device.dart';
 import 'package:flutter/material.dart';
 
 class AllDevicePage extends StatelessWidget {
@@ -13,22 +14,12 @@ class AllDevicePage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.add),
             onPressed:() => {
-              showModalBottomSheet(
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-                context: context,
-                builder: (BuildContext context) {
-                  return Container(
-                    margin: EdgeInsets.only(top: 64),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                    ),
-                  );
-                }
+              // ボタン押下時の処理
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddDevicePage(),
+                fullscreenDialog: true,
+                )
               ),
             },
           ),
