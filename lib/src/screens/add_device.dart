@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 
-class AddDevicePage extends StatelessWidget {
+// 列挙型でボタンの値を作成
+enum os { Android, iOS }
+
+// class _State extends State<AddDevicePage> {
+//   os _gValue = os.Android;
+
+// }
+
+class AddDevicePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _State();
+  }
+}
+
+class _State extends State<AddDevicePage> {
+  os _gValue = os.Android;
+
+  void _onChanged(os value) {
+    setState(() {
+      _gValue = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,61 +35,54 @@ class AddDevicePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const SizedBox(height: 50),
+                RadioListTile(
+                  title: Text('Android'),
+                  value: os.Android,
+                  groupValue: _gValue,
+                  onChanged: (value) => _onChanged(os.Android),
+                ),
+                RadioListTile(
+                  title: Text('iOS'),
+                  value: os.iOS,
+                  groupValue: _gValue,
+                  onChanged: (value) => _onChanged(os.iOS),
+                ),
+                const SizedBox(height: 50),
                 TextFormField(
                   // テキストラベル
                   decoration: InputDecoration(labelText: '端末名'),
-                  onChanged: (String value) {
-                  },
+                  onChanged: (String value) {},
                 ),
                 const SizedBox(height: 50),
                 TextFormField(
                   // テキストラベル
                   decoration: InputDecoration(labelText: "Ver"),
-                  onChanged: (String value) {
-                  },
+                  onChanged: (String value) {},
                 ),
                 const SizedBox(height: 50),
                 ButtonBar(
                   alignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ElevatedButton(
-                      onPressed: () => {},
+                      onPressed: () => {
+                        Navigator.pop(context),
+                      },
                       child: Text('キャンセル'),
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.redAccent),
                       ),
                     ),
                     ElevatedButton(
                       onPressed: () => {},
                       child: Text('デバイス追加'),
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.green),
                       ),
                     ),
                   ],
                 )
-                // Row(
-                //   children: [
-                //     ElevatedButton(
-                //       onPressed: () => {
-
-                //       },
-                //       child: Text('ボタン1'),
-                //     ),
-                //     ElevatedButton(
-                //       onPressed: () => {
-
-                //       },
-                //       child: Text('ボタン2'),
-                //     ),
-                //   ],
-                // )
-                // ElevatedButton(
-                //   onPressed: () => {
-                //     // ボタン押下後の処理
-                //   },
-                //   child: Text('デバイス追加'),
-                // ),
               ],
             ),
           ),
