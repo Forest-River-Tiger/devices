@@ -75,7 +75,7 @@ class _State extends State<AddDevicePage> {
                     ),
                     ElevatedButton(
                       onPressed: () => {},
-                      child: Text('デバイス追加'),
+                      child: Text('追加'),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.green),
