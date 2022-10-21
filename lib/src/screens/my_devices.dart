@@ -13,6 +13,7 @@ class MyDevicePage extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red.withOpacity(0.5),
         title: const Text('デバイス一覧', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+        centerTitle: true,
       ),
     );
   }
