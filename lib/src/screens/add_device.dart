@@ -3,11 +3,6 @@ import 'package:flutter/material.dart';
 // 列挙型でボタンの値を作成
 enum os { Android, iOS }
 
-// class _State extends State<AddDevicePage> {
-//   os _gValue = os.Android;
-
-// }
-
 class AddDevicePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -23,6 +18,10 @@ class _State extends State<AddDevicePage> {
       _gValue = value;
     });
   }
+
+  // 入力されたデータをデータとして保管
+  String _devicename = '';
+  String _ver = '';
 
   @override
   Widget build(BuildContext context) {
