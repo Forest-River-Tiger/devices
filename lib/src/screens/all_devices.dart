@@ -1,5 +1,10 @@
-import 'package:devices/src/screens/add_device.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:devices/src/screens/add_device.dart';
+import 'all_device_store.dart';
+import 'device.dart';
+
+/// デバイス一覧画面のクラス
 
 class AllDevicePage extends StatefulWidget {
   const AllDevicePage({Key? key}) : super(key: key);
@@ -7,6 +12,13 @@ class AllDevicePage extends StatefulWidget {
   @override
   State<AllDevicePage> createState() => _AllDevicePageState();
 }
+
+// デバイス一覧画面の状態クラス
+
+class _AllDevicePageState extends State<AllDevicePage> {
+
+  // ストア
+  final AllDeviceStore _store = AllDeviceStore();
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +56,15 @@ class AllDevicePage extends StatefulWidget {
       ),
       body: new Column(children: <Widget> [
         _listHeader(),
-        ListView.builder(
-          itemCount: _store.count(),
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-            itemCount: items == null ? 0 : items.length,
-            itemBuilder: (context, index) {
-              return _listTile(items[index]);
-            },
-        ),
+        // ListView.builder(
+          // itemCount: _store.count(),
+          // shrinkWrap: true,
+          // physics: NeverScrollableScrollPhysics(),
+            // itemCount: items == null ? 0 : items.length,
+            // itemBuilder: (context, index) {
+            //   return _listTile(items[index]);
+            // },
+        // ),
       ],),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {

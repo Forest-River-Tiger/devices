@@ -12,11 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'デバイスリスト',
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const MyStatefulWidget(),
+      home: const MyDevicePage(),
     );
   }
 }

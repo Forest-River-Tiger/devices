@@ -1,5 +1,7 @@
-import 'package:devices/src/screens/all_devices.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:devices/src/screens/all_devices.dart';
+
 
 class MyDevicePage extends StatelessWidget {
   const MyDevicePage({Key? key}) : super(key: key);
