@@ -5,7 +5,7 @@ import 'device.dart';
 // ストアクラス(取得/追加/削除/保存/読込)
 
 class AllDeviceStore {
-  final String _saveKey = 'device';
+  final String _saveKey = 'Device';
 
   List<Device> _list = [];
 
