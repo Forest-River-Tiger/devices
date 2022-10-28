@@ -54,8 +54,8 @@ class _DeviceListPageState extends State<DeviceListPage> {
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.phone_iphone), label: 'ホーム'),
-            BottomNavigationBarItem(icon: Icon(Icons.devices), label: 'お気に入り'),
+            BottomNavigationBarItem(icon: Icon(Icons.phone_iphone), label: 'my device'),
+            BottomNavigationBarItem(icon: Icon(Icons.devices), label: 'all device'),
           ],
           type: BottomNavigationBarType.fixed,
         ));
