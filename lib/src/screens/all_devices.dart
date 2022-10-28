@@ -1,119 +1,99 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:devices/src/screens/add_device.dart';
-import 'all_device_store.dart';
+import 'input_page.dart';
+import 'device_list_store.dart';
 import 'device.dart';
 
-/// デバイス一覧画面のクラス
-
-class AllDevicePage extends StatefulWidget {
-  const AllDevicePage({Key? key}) : super(key: key);
+class AllDeviceListPage extends StatefulWidget {
+  const AllDeviceListPage({Key? key}) : super(key: key);
 
   @override
-  State<AllDevicePage> createState() => _AllDevicePageState();
+  State<AllDeviceListPage> createState() => _AllDeviceListPageState();
 }
 
-// デバイス一覧画面の状態クラス
+class _AllDeviceListPageState extends State<AllDeviceListPage> {
+  final DeviceListStore _store = DeviceListStore();
 
-class _AllDevicePageState extends State<AllDevicePage> {
+  void _InputPage([Device? device]) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return InputPage(device: device,);
+        },
+      ),
+    );
+    setState(() {});
+  }
 
-  // ストア
-  final AllDeviceStore _store = AllDeviceStore();
+  @override
+  void initState() {
+    super.initState();
+
+    Future(
+      () async {
+        setState(() => _store.load());
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Scaffoldは大元の画面
-    final items = [
-      {
-        "no": "1",
-        "rental": "",
-        "deviceName":"iPhone12 mini",
-        "ver":"15.4"
-      },
-      {
-        "no": "2",
-        "rental": "",
-        "deviceName":"iPhoneX",
-        "ver":"14.0"
-      },
-      {
-        "no": "3",
-        "rental": "",
-        "deviceName":"iPhone14 Pro",
-        "ver":"16.0"
-      },
-    ];
     return Scaffold(
-      // AppBarはnavigationbar
       appBar: AppBar(
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.red.withOpacity(0.5),
-        title: const Text(
-          'デバイス一覧',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
+        title: const Text('デバイス一覧'),
       ),
-      body: new Column(children: <Widget> [
-        _listHeader(),
-        // ListView.builder(
-          // itemCount: _store.count(),
-          // shrinkWrap: true,
-          // physics: NeverScrollableScrollPhysics(),
-            // itemCount: items == null ? 0 : items.length,
-            // itemBuilder: (context, index) {
-            //   return _listTile(items[index]);
-            // },
-        // ),
-      ],),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {
-          // 追加画面に遷移
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AddDevicePage(),
-                fullscreenDialog: true,
-              )),
+      body: ListView.builder(
+        itemCount: _store.count(),
+        itemBuilder: (context, index) {
+          var item = _store.findByIndex(index);
+          return Slidable(
+            // 左方向にリストアイテムをスライドした場合のアクション
+            endActionPane: ActionPane(
+              motion: const ScrollMotion(),
+              extentRatio: 0.25,
+              children: [
+                SlidableAction(
+                  onPressed: (context) {
+                    // Todoを削除し、画面を更新する
+                    setState(() => {_store.delete(item)});
+                  },
+                  backgroundColor: Colors.red,
+                  icon: Icons.edit,
+                  label: '削除',
+                ),
+              ],
+            ),
+            child: Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey),
+                ),
+              ),
+              child: ListTile(
+                // ID
+                leading: Text(item.id.toString()),
+                // タイトル
+                title: Text(item.deviceTitle),
+                // 完了か
+                trailing: Checkbox(
+                  // チェックボックスの状態
+                  value: item.check,
+                  onChanged: (bool? value) {
+                    // Todo(完了か)を更新し、画面を更新する
+                    // setState(() => _store.update(item, value!));
+                  },
+                ),
+              ),
+            ),
+          );
         },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.redAccent,
+      ),
+      // Todo追加画面に遷移するボタン
+      floatingActionButton: FloatingActionButton(
+        // Todo追加画面に遷移する
+        onPressed: _InputPage,
+        child: const Icon(Icons.add),
       ),
     );
   }
 }
-
-Widget _listHeader() {
-  return Container(
-    decoration: new BoxDecoration(
-      border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
-    ),
-    child: ListTile(
-      title: new Row(
-        children: <Widget> [
-          new Expanded(child: new Text('No', style: new TextStyle(fontWeight: FontWeight.bold),)),
-          new Expanded(child: new Text('貸出', style: new TextStyle(fontWeight: FontWeight.bold),)),
-          new Expanded(child: new Text('端末名', style: new TextStyle(fontWeight: FontWeight.bold),)),
-          new Expanded(child: new Text('Ver', style: new TextStyle(fontWeight: FontWeight.bold),))
-        ],
-      ),
-    ),
-  );
-}
-
- Widget _listTile(items) {
-    return Container(
-        decoration: new BoxDecoration(
-            border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
-        ),
-        child: ListTile(
-            title: new Row(children: <Widget>[
-              new Expanded(child: Text("${items["no"]}")),
-              new Expanded(child: Text("${items["rental"]}")),
-              new Expanded(child: Text("${items["deviceName"]}")),
-              new Expanded(child: Text("${items["ver"]}")),
-            ]
-            )
-        )
-    );
-  }

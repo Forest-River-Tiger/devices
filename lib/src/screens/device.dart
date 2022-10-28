@@ -1,35 +1,40 @@
-// モデルクラス
 
 class Device {
-  // ID
+  /// ID
   late int id;
-  // チェックリスト
+
+    /// チェック
   late bool check;
-  // 端末名
-  late String deviceName;
-  // バージョン
+
+  /// 端末名
+  late String deviceTitle;
+
+  /// バージョン
   late String ver;
 
+  /// コンストラクタ
   Device(
     this.id,
     this.check,
-    this.deviceName,
-    this.ver
+    this.deviceTitle,
+    this.ver,
   );
 
+  /// TodoモデルをMapに変換する(保存時に使用)
   Map toJson() {
     return {
-      'id' : id,
-      'check' : check,
-      'deviceName' : deviceName,
-      'ver' : ver
+      'id': id,
+      'done': check,
+      'title': deviceTitle,
+      'detail': ver
     };
   }
 
+  /// MapをTodoモデルに変換する(読込時に使用)
   Device.fromJson(Map json) {
     id = json['id'];
     check = json['check'];
-    deviceName = json['deviceName'];
+    deviceTitle = json['deviceTitle'];
     ver = json['ver'];
   }
 }
