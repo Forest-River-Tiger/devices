@@ -4,7 +4,7 @@ class Device {
   late int id;
 
     /// チェック
-  late bool check;
+  // late bool check;
 
   /// 端末名
   late String deviceTitle;
@@ -15,7 +15,7 @@ class Device {
   /// コンストラクタ
   Device(
     this.id,
-    this.check,
+    // this.check,
     this.deviceTitle,
     this.ver,
   );
@@ -24,16 +24,16 @@ class Device {
   Map toJson() {
     return {
       'id': id,
-      'done': check,
+      // 'done': check,
       'title': deviceTitle,
-      'detail': ver
+      'ver': ver
     };
   }
 
   /// MapをTodoモデルに変換する(読込時に使用)
   Device.fromJson(Map json) {
     id = json['id'];
-    check = json['check'];
+    // check = json['check'];
     deviceTitle = json['deviceTitle'];
     ver = json['ver'];
   }

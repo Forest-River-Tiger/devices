@@ -74,15 +74,18 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
                 leading: Text(item.id.toString()),
                 // タイトル
                 title: Text(item.deviceTitle),
+                
+                // ver
+                trailing: Text('□'),
                 // 完了か
-                trailing: Checkbox(
+                // trailing: Checkbox(
                   // チェックボックスの状態
-                  value: item.check,
-                  onChanged: (bool? value) {
+                  // value: item.check,
+                  // onChanged: (bool? value) {
                     // Todo(完了か)を更新し、画面を更新する
                     // setState(() => _store.update(item, value!));
-                  },
-                ),
+                  // },
+                // ),
               ),
             ),
           );

@@ -25,7 +25,7 @@ class _InputPageState extends State<InputPage> {
   late String _ver;
 
   /// チェック
-  late bool _check;
+  // late bool _check;
 
   os _gValue = os.Android;
 
@@ -42,7 +42,7 @@ class _InputPageState extends State<InputPage> {
 
     _deviceTitle = device?.deviceTitle ?? "";
     _ver = device?.ver ?? "";
-    _check = device?.check ?? false;
+    // _check = device?.check ?? false;
     _isCreateDevice = device == null;
   }
 
@@ -86,174 +86,54 @@ class _InputPageState extends State<InputPage> {
                 TextFormField(
                   // テキストラベル
                   decoration: InputDecoration(labelText: '端末名'),
+                  controller: TextEditingController(text: _deviceTitle),
                   onChanged: (String value) {
+                    _deviceTitle = value;
                   },
                 ),
                 const SizedBox(height: 50),
                 TextFormField(
                   // テキストラベル
                   decoration: InputDecoration(labelText: "Ver"),
+                  controller: TextEditingController(text: _ver),
                   onChanged: (String value) {
+                    _ver = value;
                   },
                 ),
                 const SizedBox(height: 50),
-                ButtonBar(
-                  alignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => {
-                        Navigator.of(context).pop()
-                      },
-                      child: Text('キャンセル'),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
-                      ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_isCreateDevice) {
+                        _store.add(_deviceTitle, _ver);
+                      }
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('デバイスを追加'),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
                     ),
-                    ElevatedButton(
-                      onPressed: () => {},
-                      child: Text('デバイス追加'),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                      ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('キャンセル'),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),
           ),
         ),
       ),
-      // body: Container(
-      //   padding: const EdgeInsets.all(30),
-      //   child: Column(
-      //     children: <Widget>[
-      //       const SizedBox(height: 100),
-      //       Row(
-      //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //         children: [
-      //           Row(
-      //             children: [
-      //               Radio(
-      //                 value: os.Android,
-      //                 groupValue: _gValue,
-      //                 onChanged: (value) => _onChanged(os.Android),
-      //               ),
-      //               Text('Android')
-      //             ],
-      //           ),
-      //           Row(
-      //             children: [
-      //               Radio(
-      //                 value: os.iOS,
-      //                 groupValue: _gValue,
-      //                 onChanged: (value) => _onChanged(os.iOS),
-      //               ),
-      //               Text('iOS')
-      //             ],
-      //           ),
-      //         ],
-      //       ),
-      //       // CheckboxListTile(
-      //       //   title: const Text('(☝ ՞ਊ ՞)☝ < カンリョー'),
-      //       //   value: _check,
-      //       //   onChanged: (bool? value) {
-      //       //     setState(() {
-      //       //       _check = value ?? false;
-      //       //     });
-      //       //   },
-      //       // ),
-      //       const SizedBox(height: 50),
-      //       // タイトルのテキストフィールド
-      //       TextField(
-      //         autofocus: true,
-      //         decoration: const InputDecoration(
-      //           labelText: "タイトル",
-      //           enabledBorder: OutlineInputBorder(
-      //             borderSide: BorderSide(
-      //               color: Colors.blue,
-      //             ),
-      //           ),
-      //           focusedBorder: OutlineInputBorder(
-      //             borderSide: BorderSide(
-      //               color: Colors.blue,
-      //             ),
-      //           ),
-      //         ),
-      //         // TextEditingControllerを使用することで、いちいちsetStateしなくても画面を更新してくれる
-      //         controller: TextEditingController(text: _deviceTitle),
-      //         onChanged: (String value) {
-      //           _deviceTitle = value;
-      //         },
-      //       ),
-      //       const SizedBox(height: 20),
-      //       // 詳細のテキストフィールド
-      //       TextField(
-      //         keyboardType: TextInputType.multiline,
-      //         maxLines: null,
-      //         minLines: 3,
-      //         decoration: const InputDecoration(
-      //           labelText: "詳細",
-      //           enabledBorder: OutlineInputBorder(
-      //             borderSide: BorderSide(
-      //               color: Colors.blue,
-      //             ),
-      //           ),
-      //           focusedBorder: OutlineInputBorder(
-      //             borderSide: BorderSide(
-      //               color: Colors.blue,
-      //             ),
-      //           ),
-      //         ),
-      //         // TextEditingControllerを使用することで、いちいちsetStateしなくても画面を更新してくれる
-      //         controller: TextEditingController(text: _ver),
-      //         onChanged: (String value) {
-      //           _ver = value;
-      //         },
-      //       ),
-      //       const SizedBox(height: 20),
-      //       // 追加/更新ボタン
-      //       SizedBox(
-      //         width: double.infinity,
-      //         child: ElevatedButton(
-      //           onPressed: () {
-      //             if (_isCreateDevice) {
-      //               // Todoを追加する
-      //               _store.add(_check, _deviceTitle, _ver);
-      //             }
-      //             // Todoリスト画面に戻る
-      //             Navigator.of(context).pop();
-      //           },
-      //           child: Text(
-      //             _isCreateDevice ? '追加' : '更新',
-      //             style: const TextStyle(color: Colors.white),
-      //           ),
-      //         ),
-      //       ),
-      //       const SizedBox(height: 10),
-      //       // キャンセルボタン
-      //       SizedBox(
-      //         width: double.infinity,
-      //         child: ElevatedButton(
-      //           onPressed: () {
-      //             // Todoリスト画面に戻る
-      //             Navigator.of(context).pop();
-      //           },
-      //           style: ElevatedButton.styleFrom(
-      //             primary: Colors.white,
-      //             side: const BorderSide(
-      //               color: Colors.blue,
-      //             ),
-      //           ),
-      //           child: const Text(
-      //             "キャンセル",
-      //             style: TextStyle(color: Colors.blue),
-      //           ),
-      //         ),
-      //       ),
-      //       const SizedBox(height: 30),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }

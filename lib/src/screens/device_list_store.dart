@@ -33,10 +33,10 @@ class DeviceListStore {
   }
 
   /// Todoを追加する
-  void add(bool check, String deviceTitle, String ver) {
+  void add(String deviceTitle, String ver) {
     var id = count() == 0 ? 1 : _list.last.id + 1;
     var dateTime = getDateTime();
-    var todo = Device(id, check, deviceTitle, ver);
+    var todo = Device(id, deviceTitle, ver);
     _list.add(todo);
     save();
   }
