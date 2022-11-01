@@ -70,13 +70,21 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
                 ),
               ),
               child: ListTile(
+                title: new Row(
+                  children: <Widget>[
+                    new Expanded(child: new Text(item.id.toString(), style: new TextStyle(fontWeight: FontWeight.bold))),
+                    new Expanded(child: new Text(item.deviceTitle, style: new TextStyle(fontWeight: FontWeight.bold))),
+                    new Expanded(child: new Text(item.ver, style: new TextStyle(fontWeight: FontWeight.bold))),
+                    new Expanded(child: new Text('□', style: new TextStyle(fontWeight: FontWeight.bold),))
+                  ],
+                ),
                 // ID
-                leading: Text(item.id.toString()),
+                // leading: Text(item.id.toString()),
                 // タイトル
-                title: Text(item.deviceTitle),
-                
+                // title: Text(item.deviceTitle),
+
                 // ver
-                trailing: Text('□'),
+                // trailing: Text('□'),
                 // 完了か
                 // trailing: Checkbox(
                   // チェックボックスの状態
@@ -99,4 +107,35 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
       ),
     );
   }
+  // Widget _listHeader() {
+  //   return Container(
+  //     decoration: new BoxDecoration(
+  //       border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
+  //     ),
+  //     child: ListTile(
+  //       title: new Row(
+  //         children: <Widget>[
+  //           new Expanded(child: new Text("名称", style: new TextStyle(fontWeight:FontWeight.bold))),
+  //           new Expanded(child: new Text("URL", style: new TextStyle(fontWeight:FontWeight.bold))),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+}
+
+Widget _listHeader() {
+  return Container(
+    decoration: new BoxDecoration(
+      border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
+    ),
+    child: ListTile(
+      title: new Row(
+        children: <Widget>[
+          new Expanded(child: new Text('id', style: new TextStyle(fontWeight: FontWeight.bold))),
+          new Expanded(child: new Text('デバイス名', style: new TextStyle(fontWeight: FontWeight.bold))),
+        ],
+      ),
+    ),
+  );
 }
