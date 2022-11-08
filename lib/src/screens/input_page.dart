@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'device_list_store.dart';
 import 'device.dart';
+import 'dart:developer';
 
 enum os { Android, iOS }
 
@@ -24,16 +25,8 @@ class _InputPageState extends State<InputPage> {
   /// バージョン
   late String _ver;
 
-  /// チェック
-  // late bool _check;
-
-  os _gValue = os.Android;
-
-  void _onChanged(os value) {
-    setState(() {
-      _gValue = value;
-    });
-  }
+  /// OS
+  late String _os;
 
   @override
   void initState() {
@@ -42,7 +35,7 @@ class _InputPageState extends State<InputPage> {
 
     _deviceTitle = device?.deviceTitle ?? "";
     _ver = device?.ver ?? "";
-    // _check = device?.check ?? false;
+    _os = device?.os ?? "";
     _isCreateDevice = device == null;
   }
 
@@ -57,32 +50,15 @@ class _InputPageState extends State<InputPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const SizedBox(height: 100),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      children: [
-                        Radio(
-                          value: os.Android,
-                          groupValue: _gValue,
-                          onChanged: (value) => _onChanged(os.Android),
-                        ),
-                        Text('Android')
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Radio(
-                          value: os.iOS,
-                          groupValue: _gValue,
-                          onChanged: (value) => _onChanged(os.iOS),
-                        ),
-                        Text('iOS')
-                      ],
-                    ),
-                  ],
+                TextFormField(
+                  // テキストラベル
+                  decoration: InputDecoration(labelText: 'OS'),
+                  controller: TextEditingController(text: _os),
+                  onChanged: (String value) {
+                    _os = value;
+                  },
                 ),
-                                const SizedBox(height: 50),
+                const SizedBox(height: 50),
                 TextFormField(
                   // テキストラベル
                   decoration: InputDecoration(labelText: '端末名'),
@@ -106,7 +82,7 @@ class _InputPageState extends State<InputPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_isCreateDevice) {
-                        _store.add(_deviceTitle, _ver);
+                        _store.add(_os, _deviceTitle, _ver);
                       }
                       Navigator.of(context).pop();
                     },

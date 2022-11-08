@@ -43,6 +43,7 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
         title: const Text('デバイス一覧'),
       ),
       body: ListView.builder(
+        prototypeItem: _listHeader(),
         itemCount: _store.count(),
         itemBuilder: (context, index) {
           var item = _store.findByIndex(index);
@@ -50,7 +51,7 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
             // 左方向にリストアイテムをスライドした場合のアクション
             endActionPane: ActionPane(
               motion: const ScrollMotion(),
-              extentRatio: 0.25,
+              extentRatio: 0.2,
               children: [
                 SlidableAction(
                   onPressed: (context) {
@@ -58,7 +59,6 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
                     setState(() => {_store.delete(item)});
                   },
                   backgroundColor: Colors.red,
-                  icon: Icons.edit,
                   label: '削除',
                 ),
               ],
@@ -73,9 +73,10 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
                 title: new Row(
                   children: <Widget>[
                     new Expanded(child: new Text(item.id.toString(), style: new TextStyle(fontWeight: FontWeight.bold))),
+                    new Expanded(child: new Text(item.os, style: new TextStyle(fontWeight: FontWeight.bold))),
                     new Expanded(child: new Text(item.deviceTitle, style: new TextStyle(fontWeight: FontWeight.bold))),
                     new Expanded(child: new Text(item.ver, style: new TextStyle(fontWeight: FontWeight.bold))),
-                    new Expanded(child: new Text('□', style: new TextStyle(fontWeight: FontWeight.bold),))
+                    // new Expanded(child: new Text('□', style: new TextStyle(fontWeight: FontWeight.bold),))
                   ],
                 ),
                 // ID
