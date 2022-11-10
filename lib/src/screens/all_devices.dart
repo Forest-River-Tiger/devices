@@ -18,7 +18,9 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return InputPage(device: device,);
+          return InputPage(
+            device: device,
+          );
         },
       ),
     );
@@ -58,8 +60,20 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
                     // Todoを削除し、画面を更新する
                     setState(() => {_store.delete(item)});
                   },
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.redAccent,
                   label: '削除',
+                ),
+              ],
+            ),
+            // 右方向にリストアイテムをスライドした場合のアクション
+            startActionPane: ActionPane(
+              motion: const ScrollMotion(),
+              extentRatio: 0.2,
+              children: [
+                SlidableAction(
+                  onPressed: (context) {},
+                  backgroundColor: Colors.orangeAccent,
+                  label: '追加',
                 ),
               ],
             ),
@@ -71,30 +85,39 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
               ),
               child: ListTile(
                 title: new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    new Expanded(child: new Text(item.id.toString(), style: new TextStyle(fontWeight: FontWeight.bold))),
-                    new Expanded(child: new Text(item.os, style: new TextStyle(fontWeight: FontWeight.bold))),
-                    new Expanded(child: new Text(item.deviceTitle, style: new TextStyle(fontWeight: FontWeight.bold))),
-                    new Expanded(child: new Text(item.ver, style: new TextStyle(fontWeight: FontWeight.bold))),
-                    // new Expanded(child: new Text('□', style: new TextStyle(fontWeight: FontWeight.bold),))
+                    Container(
+                      child: new Expanded(
+                          child: new Text(item.id.toString(),
+                              style:
+                                  new TextStyle(fontWeight: FontWeight.bold))),
+                    ),
+                    Container(
+                      child: new Expanded(
+                          child: new Text(item.os,
+                              style:
+                                  new TextStyle(fontWeight: FontWeight.bold))),
+                    ),
+                    Container(
+                      child: new Expanded(
+                          child: new Text(item.deviceTitle,
+                              style:
+                                  new TextStyle(fontWeight: FontWeight.bold))),
+                    ),
+                    Container(
+                      child: new Expanded(
+                          child: new Text(item.ver,
+                              style:
+                                  new TextStyle(fontWeight: FontWeight.bold))),
+                    ),
+                    Container(
+                        child: new Expanded(
+                            child: new Text(item.name,
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.bold)))),
                   ],
                 ),
-                // ID
-                // leading: Text(item.id.toString()),
-                // タイトル
-                // title: Text(item.deviceTitle),
-
-                // ver
-                // trailing: Text('□'),
-                // 完了か
-                // trailing: Checkbox(
-                  // チェックボックスの状態
-                  // value: item.check,
-                  // onChanged: (bool? value) {
-                    // Todo(完了か)を更新し、画面を更新する
-                    // setState(() => _store.update(item, value!));
-                  // },
-                // ),
               ),
             ),
           );
@@ -108,33 +131,21 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
       ),
     );
   }
-  // Widget _listHeader() {
-  //   return Container(
-  //     decoration: new BoxDecoration(
-  //       border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
-  //     ),
-  //     child: ListTile(
-  //       title: new Row(
-  //         children: <Widget>[
-  //           new Expanded(child: new Text("名称", style: new TextStyle(fontWeight:FontWeight.bold))),
-  //           new Expanded(child: new Text("URL", style: new TextStyle(fontWeight:FontWeight.bold))),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }
 
 Widget _listHeader() {
   return Container(
     decoration: new BoxDecoration(
-      border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
-    ),
+        border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))),
     child: ListTile(
       title: new Row(
         children: <Widget>[
-          new Expanded(child: new Text('id', style: new TextStyle(fontWeight: FontWeight.bold))),
-          new Expanded(child: new Text('デバイス名', style: new TextStyle(fontWeight: FontWeight.bold))),
+          new Expanded(
+              child: new Text('id',
+                  style: new TextStyle(fontWeight: FontWeight.bold))),
+          new Expanded(
+              child: new Text('デバイス名',
+                  style: new TextStyle(fontWeight: FontWeight.bold))),
         ],
       ),
     ),

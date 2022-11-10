@@ -25,18 +25,10 @@ class DeviceListStore {
     return _list[index];
   }
 
-  /// "yyyy/MM/dd HH:mm"形式で日時を取得する
-  String getDateTime() {
-    var format = DateFormat("yyyy/MM/dd HH:mm");
-    var dateTime = format.format(DateTime.now());
-    return dateTime;
-  }
-
   /// Todoを追加する
-  void add(String os, String deviceTitle, String ver) {
+  void add(String os, String deviceTitle, String ver, String name) {
     var id = count() == 0 ? 1 : _list.last.id + 1;
-    var dateTime = getDateTime();
-    var todo = Device(id, os, deviceTitle, ver);
+    var todo = Device(id, os, deviceTitle, ver, name);
     _list.add(todo);
     save();
   }

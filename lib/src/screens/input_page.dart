@@ -28,6 +28,9 @@ class _InputPageState extends State<InputPage> {
   /// OS
   late String _os;
 
+  /// 人物
+  late String _name;
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +39,7 @@ class _InputPageState extends State<InputPage> {
     _deviceTitle = device?.deviceTitle ?? "";
     _ver = device?.ver ?? "";
     _os = device?.os ?? "";
+    _name = device?.name?? "";
     _isCreateDevice = device == null;
   }
 
@@ -77,12 +81,21 @@ class _InputPageState extends State<InputPage> {
                   },
                 ),
                 const SizedBox(height: 50),
+                TextFormField(
+                  // テキストラベル
+                  decoration: InputDecoration(labelText: "Name"),
+                  controller: TextEditingController(text: _name),
+                  onChanged: (String value) {
+                    _name = value;
+                  },
+                ),
+                const SizedBox(height: 50),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
                       if (_isCreateDevice) {
-                        _store.add(_os, _deviceTitle, _ver);
+                        _store.add(_os, _deviceTitle, _ver, _name);
                       }
                       Navigator.of(context).pop();
                     },

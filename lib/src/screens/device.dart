@@ -12,12 +12,16 @@ class Device {
   /// バージョン
   late String ver;
 
+  // 人物
+  late String name;
+
   /// コンストラクタ
   Device(
     this.id,
     this.os,
     this.deviceTitle,
     this.ver,
+    this.name,
   );
 
   /// TodoモデルをMapに変換する(保存時に使用)
@@ -26,7 +30,8 @@ class Device {
       'id': id,
       'done': os,
       'title': deviceTitle,
-      'ver': ver
+      'ver': ver,
+      'name': name
     };
   }
 
@@ -36,5 +41,6 @@ class Device {
     os = json['os'];
     deviceTitle = json['deviceTitle'];
     ver = json['ver'];
+    name = json['name'];
   }
 }
