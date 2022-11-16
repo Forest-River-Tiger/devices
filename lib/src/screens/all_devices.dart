@@ -18,9 +18,7 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return InputPage(
-            device: device,
-          );
+          return InputPage(device: device,);
         },
       ),
     );
@@ -40,16 +38,20 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('デバイス一覧'),
-      ),
-      body: ListView.builder(
-        prototypeItem: _listHeader(),
-        itemCount: _store.count(),
-        itemBuilder: (context, index) {
-          var item = _store.findByIndex(index);
-          return Slidable(
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('デバイス一覧'),
+        ),
+        body: new Column(children: <Widget>[
+          _listHeader(),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: _store.count(),
+            itemBuilder: (context, index) {
+              var item = _store.findByIndex(index);
+              return Slidable(
             // 左方向にリストアイテムをスライドした場合のアクション
             endActionPane: ActionPane(
               motion: const ScrollMotion(),
@@ -65,18 +67,6 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
                 ),
               ],
             ),
-            // 右方向にリストアイテムをスライドした場合のアクション
-            startActionPane: ActionPane(
-              motion: const ScrollMotion(),
-              extentRatio: 0.2,
-              children: [
-                SlidableAction(
-                  onPressed: (context) {},
-                  backgroundColor: Colors.orangeAccent,
-                  label: '追加',
-                ),
-              ],
-            ),
             child: Container(
               decoration: const BoxDecoration(
                 border: Border(
@@ -88,46 +78,32 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Container(
-                      child: new Expanded(
-                          child: new Text(item.id.toString(),
-                              style:
-                                  new TextStyle(fontWeight: FontWeight.bold))),
+                      child: new Expanded(child: new Text(item.id.toString(), style: new TextStyle(fontWeight: FontWeight.normal, fontSize: 12))),
                     ),
                     Container(
-                      child: new Expanded(
-                          child: new Text(item.os,
-                              style:
-                                  new TextStyle(fontWeight: FontWeight.bold))),
+                      child: new Expanded(child: new Text(item.os, style: new TextStyle(fontWeight: FontWeight.normal, fontSize: 12))),
                     ),
                     Container(
-                      child: new Expanded(
-                          child: new Text(item.deviceTitle,
-                              style:
-                                  new TextStyle(fontWeight: FontWeight.bold))),
+                      child: new Expanded(child: new Text(item.deviceTitle, style: new TextStyle(fontWeight: FontWeight.normal, fontSize: 12))),
                     ),
                     Container(
-                      child: new Expanded(
-                          child: new Text(item.ver,
-                              style:
-                                  new TextStyle(fontWeight: FontWeight.bold))),
+                      child: new Expanded(child: new Text(item.ver, style: new TextStyle(fontWeight: FontWeight.normal, fontSize: 12))),
                     ),
                     Container(
-                        child: new Expanded(
-                            child: new Text(item.name,
-                                style: new TextStyle(
-                                    fontWeight: FontWeight.bold)))),
+                      child: new Expanded(child: new Text(item.name, style: new TextStyle(fontWeight: FontWeight.normal, fontSize: 12)))
+                    ),
                   ],
                 ),
               ),
             ),
           );
-        },
-      ),
-      // Todo追加画面に遷移するボタン
-      floatingActionButton: FloatingActionButton(
-        // Todo追加画面に遷移する
+            },
+          ),
+        ]),
+        floatingActionButton: FloatingActionButton(
         onPressed: _InputPage,
         child: const Icon(Icons.add),
+      ),
       ),
     );
   }
@@ -136,16 +112,16 @@ class _AllDeviceListPageState extends State<AllDeviceListPage> {
 Widget _listHeader() {
   return Container(
     decoration: new BoxDecoration(
-        border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))),
+      border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
+    ),
     child: ListTile(
       title: new Row(
         children: <Widget>[
-          new Expanded(
-              child: new Text('id',
-                  style: new TextStyle(fontWeight: FontWeight.bold))),
-          new Expanded(
-              child: new Text('デバイス名',
-                  style: new TextStyle(fontWeight: FontWeight.bold))),
+          new Expanded(child: new Text('No', style: new TextStyle(fontWeight: FontWeight.bold))),
+          new Expanded(child: new Text('OS', style: new TextStyle(fontWeight: FontWeight.bold))),
+          new Expanded(child: new Text('Device', style: new TextStyle(fontWeight: FontWeight.bold))),
+          new Expanded(child: new Text('Ver', style: new TextStyle(fontWeight: FontWeight.bold))),
+          new Expanded(child: new Text('Name', style: new TextStyle(fontWeight: FontWeight.bold))),
         ],
       ),
     ),
