@@ -65,7 +65,7 @@ class _InputPageState extends State<InputPage> {
                 const SizedBox(height: 50),
                 TextFormField(
                   // テキストラベル
-                  decoration: InputDecoration(labelText: '端末名'),
+                  decoration: InputDecoration(labelText: 'Device'),
                   controller: TextEditingController(text: _deviceTitle),
                   onChanged: (String value) {
                     _deviceTitle = value;
